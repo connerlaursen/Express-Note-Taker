@@ -33,7 +33,7 @@ app.get('/notes', (req, res) => {
       let notes = JSON.parse(data)
     res.send(notes)
   })});
-
+// save note
   app.post("/api/notes", (req, res) => {
 
     fs.readFile("./db/db.json", "utf8", (err, data) => {
@@ -54,7 +54,6 @@ app.get('/notes', (req, res) => {
         id: uuid()
       }
       notes.push(toDo);
-      // notes.push(req.body)
 
       fs.writeFile("./db/db.json", JSON.stringify(notes), (err) => {
         console.log(notes)
@@ -63,36 +62,36 @@ app.get('/notes', (req, res) => {
     })
   });
 
+  // delete function didnt work, so its commented out
+
+// app.delete("api/notes/:id", (req, res) => {
+//   fs.readFile("./db/db.json", "utf8", (err, data) => {
+
+//     if (err) {
+//       res.status(500).send(err)
+//       return
+//     }
+
+//   let notes = JSON.parse(data)
+//   let note = notes.find(note => {
+//     note.id === req.params.id
+//   })
+//   notes.splice(note, 1)
+
+//   fs.writeFile("./db/db.json", JSON.stringify(notes), "utf8", (err) =>
+//   {
+//     if (err) {
+
+//       res.status(500).send(err)
+//       res.send("note deleted")
+  
+//     }
+//   })
+  
+//   })
   
 
-app.delete("api/notes/:id", (req, res) => {
-  fs.readFile("./db/db.json", "utf8", (err, data) => {
-
-    if (err) {
-      res.status(500).send(err)
-      return
-    }
-
-  let notes = JSON.parse(data)
-  let note = notes.find(note => {
-    note.id === req.params.id
-  })
-  notes.splice(note, 1)
-
-  fs.writeFile("./db/db.json", JSON.stringify(notes), "utf8", (err) =>
-  {
-    if (err) {
-
-      res.status(500).send(err)
-      res.send("note deleted")
-  
-    }
-  })
-  
-  })
-  
-
-})
+// })
 
 app.listen(PORT, () =>{
 
